@@ -1,5 +1,5 @@
 function h = plotSquare(varargin)
-% PLOTRECTANGLE plots a square in 3D
+% PLOTSQUARE plots a square in 3D
 %   h = plotSquare(rfit) plots a square in the current axes
 %
 %   h = plotSquare(axs,___)
