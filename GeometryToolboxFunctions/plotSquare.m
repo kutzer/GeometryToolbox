@@ -14,7 +14,7 @@ function h = plotSquare(varargin)
 %   Outputs:
 %       h - patch object handle for the plotted square
 %
-%   See also plotRectanguloid
+%   See also plotRectangle plotCube plotRectanguloid
 %
 %   M. Kutzer, 31Jan2025, USNA
 
