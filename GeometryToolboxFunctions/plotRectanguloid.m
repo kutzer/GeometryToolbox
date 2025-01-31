@@ -15,7 +15,7 @@ function h = plotRectanguloid(varargin)
 %   Outputs:
 %       h - patch object handle for the plotted rectanguloid
 %
-%   See also plotRectangle plotSquare plotCube
+%   See also plotCube plotRectangle plotSquare 
 %
 %   M. Kutzer, 31Jan2025, USNA
 
