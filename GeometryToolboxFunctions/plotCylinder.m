@@ -1,4 +1,4 @@
-function h = plotCylinder(varargin)
+function varargout = plotCylinder(varargin)
 % PLOTCYLINDER plots a cylinder defined in 3D
 %   h = plotCylinder(cyfit) plots a cylinder with a default of 100 equally
 %   spaced points about the circular faces
@@ -7,6 +7,8 @@ function h = plotCylinder(varargin)
 %   of points.
 %
 %   h = plotCylinder(axs,___)
+%
+%   [h,p] = plotCylinder(axs,___)
 %
 %   Inputs:
 %        axs - *optional* handle of the parent of the plotted cylinder
@@ -19,6 +21,8 @@ function h = plotCylinder(varargin)
 %
 %   Outputs:
 %       h - patch object handle for the plotted cylinder
+%       p - [OPTIONAL] plot object highlighting the edge of each circular
+%           face
 %
 %   See also fitCircle interpCircle
 %
@@ -98,4 +102,17 @@ for i = 1:N
 end
 
 h = patch(cy,'FaceColor','b','FaceAlpha',0.5,...
-    'EdgeColor','none','LineWidth',2);
+    'EdgeColor','none','LineWidth',2,'Parent',axs);
+
+%% Package output(s)
+varargout{1} = h;
+
+if nargout > 1
+    idx = [1:N,1];
+    p = plot3(...
+        [X_wL(1,idx),nan,X_wU(1,idx)],...
+        [X_wL(2,idx),nan,X_wU(2,idx)],...
+        [X_wL(3,idx),nan,X_wU(3,idx)],...
+        'Color','b','LineWidth',2,'Parent',axs);
+    varargout{2} = p;
+end
