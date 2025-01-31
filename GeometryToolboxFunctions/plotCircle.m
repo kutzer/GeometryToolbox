@@ -77,4 +77,4 @@ X_w = interpCircle(cfit,N);
 %h = plot3(X_w(1,:),X_w(2,:),X_w(3,:),'Parent',axs,'LineWidth',2);
 c.Vertices = X_w(1:3,:).';
 c.Faces = 1:N;
-h = patch(c,'FaceColor','None','EdgeColor','b','LineWidth',2);
+h = patch(c,'FaceColor','None','EdgeColor','b','LineWidth',2,'Parent',axs);
