@@ -32,11 +32,11 @@ end
 abcd = varargin{1};
 
 % Set defaults
-Xlim(1,:) = xlim(axs);
-Xlim(2,:) = ylim(axs);
-Xlim(3,:) = zlim(axs);
-s = norm( diff(Xlim,1,2) )/2;
-X = mean(Xlim,2);
+X_lim(1,:) = xlim(axs);
+X_lim(2,:) = ylim(axs);
+X_lim(3,:) = zlim(axs);
+s = norm( diff(X_lim,1,2) )/2;
+X = mean(X_lim,2);
 
 if numel(varargin) > 1
     X = varargin{2};
