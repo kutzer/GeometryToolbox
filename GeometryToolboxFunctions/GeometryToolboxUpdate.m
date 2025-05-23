@@ -6,8 +6,8 @@ function GeometryToolboxUpdate
 
 % Updates:
 %   07Jan2021 - Updated ToolboxUpdate
+%   22May2025 - Updated to enable local install
 
-% TODO - Find a location for "GeometryToolbox Example SCRIPTS"
 % TODO - update function for general operation
 
 ToolboxUpdate('Geometry');
