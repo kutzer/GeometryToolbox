@@ -24,11 +24,12 @@ function varargout = GeometryToolboxVer
 %   05Mar2023 - Added fitArc2pntRad
 %   05Sep2024 - Migrated fitCirclePTT and associated functions to toolbox
 %   31Jan2025 - Added rectangle, square, rectanguloid, cube plot functions
+%   22May2025 - Updated for local user install
 
 A.Name = 'Geometry Toolbox';
-A.Version = '1.1.3';
+A.Version = '1.1.4';
 A.Release = '(R2022a)';
-A.Date = '31-Jan-2025';
+A.Date = '23-May-2025';
 A.URLVer = 1;
 
 msg{1} = sprintf('MATLAB %s Version: %s %s',A.Name, A.Version, A.Release);
