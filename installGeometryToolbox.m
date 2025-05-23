@@ -1,4 +1,4 @@
-function installGeometryToolbox(replaceExisting)
+function installGeometryToolbox(replaceExisting,skipAdmin)
 % INSTALLGEOMETRYTOOLBOX installs Geometry Toolbox for MATLAB.
 %   INSTALLGEOMETRYTOOLBOX installs Geometry Toolbox into the following 
 %   locations:
