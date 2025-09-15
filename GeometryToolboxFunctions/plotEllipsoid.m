@@ -24,6 +24,7 @@ function varargout = plotEllipsoid(varargin)
 % Updates
 %   19Jan2022 - Corrected narginchk error
 %   08Mar2022 - Check for 3-element principal radii
+%   15Sep2025 - Updated ancestor call to includes 'axes'
 
 %% Check inputs
 narginchk(1,3);
@@ -66,7 +67,7 @@ end
 
 % Deconflict axs/hgtransform
 h_e2a = axs;
-axs = ancestor(h_e2a);
+axs = ancestor(h_e2a,'axes');
 
 %% Plot ellipsoid
 r = efit.PrincipalRadii;
