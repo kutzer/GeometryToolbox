@@ -25,11 +25,12 @@ function varargout = GeometryToolboxVer
 %   05Sep2024 - Migrated fitCirclePTT and associated functions to toolbox
 %   31Jan2025 - Added rectangle, square, rectanguloid, cube plot functions
 %   22May2025 - Updated for local user install
+%   15Sep2025 - Updated plotEllipsoid ancestor call to include 'axes'
 
 A.Name = 'Geometry Toolbox';
-A.Version = '1.1.4';
+A.Version = '1.1.5';
 A.Release = '(R2022a)';
-A.Date = '23-May-2025';
+A.Date = '15-Sep-2025';
 A.URLVer = 1;
 
 msg{1} = sprintf('MATLAB %s Version: %s %s',A.Name, A.Version, A.Release);
