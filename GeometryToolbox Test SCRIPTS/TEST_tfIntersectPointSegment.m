@@ -8,8 +8,8 @@ axs = axes('Parent',fig,'NextPlot','add');
 plt = plotSegment(axs,seg);
 
 %% Define random point
-%X = rand(2,1);
-X = seg*[rand(1); 1];
+X = rand(2,1);
+%X = seg*[rand(1); 1];
 
 pltX = plot(axs,X(1),X(2),'*m');
 
