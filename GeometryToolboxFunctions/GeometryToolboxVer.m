@@ -26,11 +26,12 @@ function varargout = GeometryToolboxVer
 %   31Jan2025 - Added rectangle, square, rectanguloid, cube plot functions
 %   22May2025 - Updated for local user install
 %   15Sep2025 - Updated plotEllipsoid ancestor call to include 'axes'
+%   23Oct2025 - Updated to include plotSegment and segment/point intersect
 
 A.Name = 'Geometry Toolbox';
-A.Version = '1.1.5';
+A.Version = '1.1.6';
 A.Release = '(R2022a)';
-A.Date = '15-Sep-2025';
+A.Date = '23-Oct-2025';
 A.URLVer = 1;
 
 msg{1} = sprintf('MATLAB %s Version: %s %s',A.Name, A.Version, A.Release);
