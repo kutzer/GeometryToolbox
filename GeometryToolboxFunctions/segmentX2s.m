@@ -10,7 +10,7 @@ function [s,tfOnSegment,tfOnLine] = segmentX2s(seg,X,ZERO)
 %             2D segment such that X = C*[s; 1].
 %         X - 2x1 array specifying the point for the recovered
 %             parameterization. If the point does not lie on the segment,
-%             an empty set is returned.]
+%             an empty set is returned.
 %      ZERO - [OPTIONAL] specifies a positive value near zero to use for
 %             comparison of recovered values. If unspecified, ZERO = 1e-8.
 %
