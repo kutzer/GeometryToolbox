@@ -11,6 +11,8 @@ function tf = isParallelSegmentSegment(seg1,seg2,ZERO)
 %       tf - scalar logical value indicating whether or not segments are
 %            parallel
 %
+%   See also fitSegment isCollinearSegmentSegment
+%
 %   M. Kutzer, 17May2026, USNA
 
 %% Check input(s)
