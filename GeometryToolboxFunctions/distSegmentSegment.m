@@ -27,6 +27,7 @@ function [d_mag,d,d1,d2] = distSegmentSegment(varargin)
 % Update(s)
 %   06Jan2023 - Revised varargin parsing for nargin == 2
 %   17May2026 - Revised to check for parallel and co-linear segments
+%   17May2026 - Revised to check for intersecting segments
 
 % TODO - This function can be expanded to work with Nth order lines (i.e.
 % remove the N = 2 or N = 3 constraint.
@@ -109,34 +110,71 @@ for i = 1:numel(seg)
 end
 
 % Check if segments are parallel
-if norm( cross(segCoef{1}(:,1),segCoef{2}(:,2)) ) < ZERO
+tfParallel = norm( cross(segCoef{1}(:,1),segCoef{2}(:,2)) ) < ZERO;
+if tfParallel
     % Segments are parallel
 
     % Check if segments are colinear
     v_between = segCoef{2}(:,2) - segCoef{1}(:,1);
-    if norm( cross(segCoef{1}(:,1),v_between) ) < ZERO
+    tfColinear = norm( cross(segCoef{1}(:,1),v_between) ) < ZERO;
+    if tfColinear
         % Segments are co-linear
-        d_mag = 0;
 
-        s1 = (segX{2} - repmat(segCoef{1}(:,2),1,2)).'*segCoef{1}(:,1)./...
-            dot(segCoef{1}(:,1),segCoef{1}(:,1));
-        s1(s1 > 1) = 1;
-        s1(s1 < 0) = 0;
-        s1 = mean(s1);
-        d1 = segCoef{1}*[s1; 1];
+        s1 = [...
+            segmentX2s(segCoef{1},segX{2}(:,1),ZERO),...
+            segmentX2s(segCoef{1},segX{2}(:,2),ZERO) ];
 
-        s2 = (segX{1} - repmat(segCoef{2}(:,2),1,2)).'*segCoef{2}(:,1)./...
-            dot(segCoef{2}(:,1),segCoef{2}(:,1));
-        s2(s2 > 1) = 1;
-        s2(s2 < 0) = 0;
-        s2 = mean(s2);
-        d2 = segCoef{2}*[s2; 1];
+        s2 = [...
+            segmentX2s(segCoef{2},segX{1}(:,1),ZERO),...
+            segmentX2s(segCoef{2},segX{1}(:,2),ZERO) ];
+        
+        % Check if segments overlap
+        if any(s1 > -ZERO & s1-1 < ZERO) && any(s2 > -ZERO & s2-1 < ZERO)
+            % Segments overlap!
+            s1 = mean( s1( s1 > -ZERO & s1-1 < ZERO) );
+            s2 = mean( s2( s2 > -ZERO & s2-1 < ZERO) );
 
-        d = d2 - d1;
+            d_mag = 0;
+
+            d1 = segCoef{1}*[s1; 1];
+            d2 = segCoef{2}*[s2; 1];
+
+            d = d2 - d1;
+        else
+            % Segments do not overlap
+            % -> Find closest end-points
+            d = inf(size(segX{1},2),size(segX{2},2));
+            for i = 1:size(segX{1},2)
+                for j = 1:size(segX{2},2)
+                    d(i,j) = norm( segX{2}(:,j) - segX{1}(:,i) );
+                end
+            end
+            [i,j] = find(d == min(reshape(d,1,[])),1,'first');
+
+            d1 = segX{1}(:,i);
+            d2 = segX{2}(:,j);
+
+            d = d2 - d1;
+
+            d_mag = norm(d);
+        end
 
         return
     end
 end
+
+% -> Segments intersect
+[intEE,intEV,intVV,intPt] = intersectSegmentSegment(segX{1},segX{2},ZERO);
+if intEE || intEV || intVV
+    d_mag = 0;
+
+    d1 = intPt;
+    d2 = intPt;
+
+    d = d2 - d1;
+    return
+end
+
 %% Calculate shortest distance
 % This code is based off of the code posted to [1]. Per the distribution
 % instructions of [1], the following copyright information is included:
