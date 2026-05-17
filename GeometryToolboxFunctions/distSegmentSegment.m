@@ -110,7 +110,7 @@ for i = 1:numel(seg)
 end
 
 % Check if segments are parallel
-tfParallel = norm( cross(segCoef{1}(:,1),segCoef{2}(:,2)) ) < ZERO;
+tfParallel = isParallelSegmentSegment(segCoef{1},segCoef{2},ZERO);
 if tfParallel
     % Segments are parallel
 
