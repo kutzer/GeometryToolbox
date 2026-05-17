@@ -49,6 +49,12 @@ v1_hat = v1./norm(v1);
 p1 = seg1(:,2);
 p2 = seg2(:,2);
 
+% Check for shared end-point
+if norm(p2-p1) < ZERO
+    % Choose another end-point
+    p2 = seg2*[1;1];
+end
+
 p12_hat = (p2-p1)./norm(p2-p1);
 
 dotProd = dot(v1_hat,p12_hat);
