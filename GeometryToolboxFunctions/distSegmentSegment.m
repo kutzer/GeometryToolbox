@@ -22,8 +22,11 @@ function [d_mag,d,d1,d2] = distSegmentSegment(varargin)
 %
 %   M. Kutzer, 06Nov2018, USNA
 
+% TODO - add ZERO as an input to this function!!!
+
 % Update(s)
 %   06Jan2023 - Revised varargin parsing for nargin == 2
+%   17May2026 - Revised to check for parallel and co-linear segments
 
 % TODO - This function can be expanded to work with Nth order lines (i.e.
 % remove the N = 2 or N = 3 constraint.
@@ -97,6 +100,43 @@ switch exist('zeroFPError','file')
         return
 end
 
+%% Consider the special case(s)
+% -> Segments are co-linear
+ZERO = 1e-8; % TODO - add ZERO as an input to this function!!!
+for i = 1:numel(seg)
+    segX{i} = [seg(i).Point0,seg(i).Point1];
+    segCoef{i} = fitSegment(seg(i).Point0,seg(i).Point1);
+end
+
+% Check if segments are parallel
+if norm( cross(segCoef{1}(:,1),segCoef{2}(:,2)) ) < ZERO
+    % Segments are parallel
+
+    % Check if segments are colinear
+    v_between = segCoef{2}(:,2) - segCoef{1}(:,1);
+    if norm( cross(segCoef{1}(:,1),v_between) ) < ZERO
+        % Segments are co-linear
+        d_mag = 0;
+
+        s1 = (segX{2} - repmat(segCoef{1}(:,2),1,2)).'*segCoef{1}(:,1)./...
+            dot(segCoef{1}(:,1),segCoef{1}(:,1));
+        s1(s1 > 1) = 1;
+        s1(s1 < 0) = 0;
+        s1 = mean(s1);
+        d1 = segCoef{1}*[s1; 1];
+
+        s2 = (segX{1} - repmat(segCoef{2}(:,2),1,2)).'*segCoef{2}(:,1)./...
+            dot(segCoef{2}(:,1),segCoef{2}(:,1));
+        s2(s2 > 1) = 1;
+        s2(s2 < 0) = 0;
+        s2 = mean(s2);
+        d2 = segCoef{2}*[s2; 1];
+
+        d = d2 - d1;
+
+        return
+    end
+end
 %% Calculate shortest distance
 % This code is based off of the code posted to [1]. Per the distribution
 % instructions of [1], the following copyright information is included:
