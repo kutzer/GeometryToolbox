@@ -29,9 +29,9 @@ function varargout = GeometryToolboxVer
 %   23Oct2025 - Updated to include plotSegment and segment/point intersect
 
 A.Name = 'Geometry Toolbox';
-A.Version = '1.1.6';
+A.Version = '1.1.7';
 A.Release = '(R2022a)';
-A.Date = '23-Oct-2025';
+A.Date = '16-May-2026';
 A.URLVer = 1;
 
 msg{1} = sprintf('MATLAB %s Version: %s %s',A.Name, A.Version, A.Release);
