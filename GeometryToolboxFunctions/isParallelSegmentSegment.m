@@ -33,4 +33,12 @@ if size(seg1,1) ~= size(seg2,1)
 end
 
 %% Check for parallel segments
-tf = norm( cross(seg1(:,1),seg1(:,2)) ) < ZERO;
+v1 = seg1(:,1);
+v2 = seg2(:,1);
+
+v1_hat = v1./norm(v1);
+v2_hat = v2./norm(v2);
+
+dotProd = dot(v1_hat,v2_hat);
+
+tf = abs(1 - abs(dotProd)) < ZERO;
