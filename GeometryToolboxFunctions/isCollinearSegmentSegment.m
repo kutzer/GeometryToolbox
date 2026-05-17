@@ -53,6 +53,11 @@ p2 = seg2(:,2);
 if norm(p2-p1) < ZERO
     % Choose another end-point
     p2 = seg2*[1;1];
+
+    % Check if second end-point is shared
+    if norm(p2-p1) < ZERO
+        p2 = seg2*[0.5;1];
+    end
 end
 
 p12_hat = (p2-p1)./norm(p2-p1);
