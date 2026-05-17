@@ -45,7 +45,7 @@ s1 = [];
 s2 = [];
 
 %% Check if segments are collinear
-if ~isCollinearSegmentSegment(seg1,seg2)
+if ~isCollinearSegmentSegment(seg1,seg2,ZERO)
     return
 end
 
