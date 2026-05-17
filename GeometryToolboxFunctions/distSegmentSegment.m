@@ -115,9 +115,8 @@ if tfParallel
     % Segments are parallel
 
     % Check if segments are colinear
-    v_between = segCoef{2}(:,2) - segCoef{1}(:,1);
-    tfColinear = norm( cross(segCoef{1}(:,1),v_between) ) < ZERO;
-    if tfColinear
+    tfCollinear = isCollinearSegmentSegment(segCoef{1},segCoef{2},ZERO);
+    if tfCollinear
         % Segments are co-linear
 
         s1 = [...
