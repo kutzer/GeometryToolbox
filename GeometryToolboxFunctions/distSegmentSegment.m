@@ -118,14 +118,19 @@ if tfParallel
     tfCollinear = isCollinearSegmentSegment(segCoef{1},segCoef{2},ZERO);
     if tfCollinear
         % Segments are co-linear
-
-        s1 = [...
-            segmentX2s(segCoef{1},segX{2}(:,1),ZERO),...
-            segmentX2s(segCoef{1},segX{2}(:,2),ZERO) ];
-
-        s2 = [...
-            segmentX2s(segCoef{2},segX{1}(:,1),ZERO),...
-            segmentX2s(segCoef{2},segX{1}(:,2),ZERO) ];
+        
+        % Check for 2D case
+        if all( segX{1}(3,:) == 0 ) && all( segX{2}(3,:) == 0 )
+            s1 = [...
+                segmentX2s(segCoef{1}(1:2,:),segX{2}(1:2,1),ZERO),...
+                segmentX2s(segCoef{1}(1:2,:),segX{2}(1:2,2),ZERO) ];
+    
+            s2 = [...
+                segmentX2s(segCoef{2}(1:2,:),segX{1}(1:2,1),ZERO),...
+                segmentX2s(segCoef{2}(1:2,:),segX{1}(1:2,2),ZERO) ];
+        else
+            error('TODO! - Generalize segmentX2s for ND!!!');
+        end
         
         % Check if segments overlap
         if any(s1 > -ZERO & s1-1 < ZERO) && any(s2 > -ZERO & s2-1 < ZERO)
