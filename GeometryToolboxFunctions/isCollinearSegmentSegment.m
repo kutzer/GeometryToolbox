@@ -40,5 +40,17 @@ if ~tf
 end
 
 %% Check if segments are collinear
-v_between = seg2(:,2) - seg1(:,1);
-tf = norm( cross(seg1(:,1),v_between) ) < ZERO;
+v1 = seg1(:,1);
+%v2 = seg2(:,1);
+
+v1_hat = v1./norm(v1);
+%v2_hat = v2./norm(v2);
+
+p1 = seg1(:,2);
+p2 = seg2(:,2);
+
+p12_hat = (p2-p1)./norm(p2-p1);
+
+dotProd = dot(v1_hat,p12_hat);
+
+tf = abs(1 - abs(dotProd)) < ZERO;
